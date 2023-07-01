@@ -1,14 +1,11 @@
 
 import './App.css';
-import Navbar from './components/Navbar';
 import Home from './screens/Home';
 import Signup from './screens/Signup';
 import Login from './screens/Login';
-import Footer from './screens/Footer';
 import {
   BrowserRouter, Routes, Route
 } from "react-router-dom";
-
 import { CartProvider } from './components/ContextReducer';
 import Cart from './screens/Cart';
 import MyOrder from './screens/myOrder';

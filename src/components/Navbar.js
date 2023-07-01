@@ -21,7 +21,7 @@ export default function Navbar() {
   return (
     <div>
       <nav className="bg-red-500">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6   lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0">
@@ -33,14 +33,14 @@ export default function Navbar() {
                   <Link to="/Aboutus" className="text-white hover:text-gray-200 px-3 py-2 rounded-md text-sm font-medium">AboutUs</Link>
                   <Link to="/Contact" className="text-white hover:text-gray-200 px-3 py-2 rounded-md text-sm font-medium">Contact</Link>
                   {(localStorage.getItem("Authtoken")) ?
-                    <Link to="/myOrder" className="text-white hover:text-gray-200 px-3 py-2 rounded-md text-sm font-medium" > MyOrders</Link>
+                    <Link to="/myOrder" className="text-white hover:text-gray-200 px-3 py-2 rounded-md text-sm font-medium">MyOrders</Link>
                     : null
                   }
                 </div>
               </div>
               <div className="md:hidden ml-auto">
                 <button
-                  className="text-white hover:text-gray-200 focus:outline-none"
+                  className="text-white hover:text-gray-200 focus:outline-none absolute top-4 right-4"
                   onClick={toggleMenu}
                 >
                   <svg
@@ -70,24 +70,25 @@ export default function Navbar() {
             </div>
 
             {!(localStorage.getItem("Authtoken")) ? (
-              <div className="hidden md:block   ">
+              <div className="hidden md:block ml-4">
                 <Link
                   to="/Login"
-                  className="inline-block text-sm px-4 py-2  leading-none border rounded text-white border-white hover:border-transparent hover:text-red-500 hover:bg-white mt-4 md:mt-0  "
+                  className="inline-block text-sm px-4 py-2  leading-none border rounded text-white border-white hover:border-transparent hover:text-red-500 hover:bg-white mt-4 mr-2 md:mt-0"
                 >
                   Log In
                 </Link>
                 <Link
                   to="/Signup"
-                  className="inline-block  ml-3 text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-red-500 hover:bg-white mt-4 md:mt-0 "
+                  className="inline-block text-sm px-4 py-2  leading-none border rounded text-white border-white hover:border-transparent hover:text-red-500 hover:bg-white mt-4 md:mt-0  "
+
                 >
                   Sign Up
                 </Link>
               </div>
             ) : (
-              <div className="hidden md:flex space-x-3">
+              <div className=" hidden md:flex items-center space-x-2">
                 <div
-                  className="flex items-center text-sm px-4 py-2 leading-none border rounded border-white hover:border-transparent text-red-500 bg-white"
+                  className="flex items-center text-md px-2  py-1 leading-none border rounded border-white hover:border-transparent text-red-500 bg-white"
                   onClick={() => {
                     nav("/Cart");
                   }}
@@ -98,7 +99,7 @@ export default function Navbar() {
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
-                      stroke-width="1.5"
+                      strokeWidth="1.5"
                       stroke="currentColor"
                       className="w-6 h-6"
                     >
@@ -109,13 +110,13 @@ export default function Navbar() {
                       />
                     </svg>
                   ) : (
-                    <span className="ml-1 inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-medium px-1 bg-red-500 text-white">
+                    <span className="ml-1 inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-medium px-1 bg-white text-red-500">
                       {data.length}
                     </span>
                   )}
                 </div>
                 <div
-                  className="flex items-center text-md px-4 py-2 leading-none border rounded border-white hover:border-transparent text-red-500 bg-white"
+                  className="flex items-center text-md px-5 py-2 leading-none border rounded border-white hover:border-transparent text-red-500 bg-white"
                   onClick={handleLogout}
                 >
                   Logout
@@ -124,62 +125,94 @@ export default function Navbar() {
             )}
           </div>
         </div>
-        {isMenuOpen && (
-          <div className="md:hidden">
-            <div className="flex flex-col space-y-2 px-4 py-3 bg-red-500">
+      </nav>
+      {isMenuOpen && (
+        <div className="md:hidden">
+          <div className="flex flex-col space-y-2 px-4 py-3 bg-red-500">
+            <Link
+              to="/"
+              className="text-white hover:text-gray-200 py-2 rounded-md text-sm font-medium"
+            >
+              Home
+            </Link>
+            <Link
+              to="/Aboutus"
+              className="text-white hover:text-gray-200 py-2 rounded-md text-sm font-medium"
+            >
+              AboutUs
+            </Link>
+            <Link
+              to="/Contact"
+              className="text-white hover:text-gray-200 py-2 rounded-md text-sm font-medium"
+            >
+              Contact
+            </Link>
+            {localStorage.getItem("Authtoken") && (
               <Link
-                to="/"
+                to="/myOrder"
                 className="text-white hover:text-gray-200 py-2 rounded-md text-sm font-medium"
               >
-                Home
+                MyOrders
               </Link>
-              <Link
-                to="/Aboutus"
-                className="text-white hover:text-gray-200 py-2 rounded-md text-sm font-medium"
-              >
-                AboutUs
-              </Link>
-              <Link
-                to="/Contact"
-                className="text-white hover:text-gray-200 py-2 rounded-md text-sm font-medium"
-              >
-                Contact
-              </Link>
-              {localStorage.getItem("Authtoken") && (
-                <Link
-                  to="/myOrder"
+            )}
+            {localStorage.getItem("Authtoken") ? (
+              <div className=" md:flex items-center space-x-2">
+                <div
                   className="text-white hover:text-gray-200 py-2 rounded-md text-sm font-medium"
+                  onClick={() => {
+                    nav("/Cart");
+                  }}
                 >
-                  MyOrders
-                </Link>
-              )}
-              {localStorage.getItem("Authtoken") ? (
+                  My Cart
+                  {data.length === 0 ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="w-6 h-6 inline-flex"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+                      />
+                    </svg>
+                  ) : (
+                    <span className="ml-1 inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-medium px-1 bg-white text-red-500">
+                      {data.length}
+                    </span>
+                  )}
+                </div>
                 <div
                   className="text-white hover:text-gray-200 py-2 rounded-md text-sm font-medium"
                   onClick={handleLogout}
                 >
                   Logout
                 </div>
-              ) : (
-                <div className="flex">
-                  <Link
-                    to="/Login"
-                    className="text-white hover:text-gray-200 py-2 rounded-md text-sm font-medium"
-                  >
-                    Log In
-                  </Link>
-                  <Link
-                    to="/Signup"
-                    className="text-white hover:text-gray-200 py-2 rounded-md text-sm font-medium"
-                  >
-                    Sign Up
-                  </Link>
+              </div>
+            ) : (
+              <div >
+                <Link
+                  to="/Login"
+                  className="text-white hover:text-gray-200 py-2 rounded-md text-sm font-medium "
+                >
+                  Log In
+                </Link>
+                <div className="mt-2">
+                <Link
+                  to="/Signup"
+                  className="text-white hover:text-gray-200 py-2 rounded-md text-sm font-medium"
+                >
+                  Sign Up
+                </Link>
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
-        )}
-      </nav>
+        </div>
+      )}
     </div>
   );
 }
