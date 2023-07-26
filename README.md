@@ -1,5 +1,5 @@
 #  Food App Built using MERN Stack
-The  Food App is a full-stack web application built using the MERN (MongoDB, Express, React, Node.js) stack, with an added touch of Tailwind CSS for efficient styling..  It provides a seamless and intuitive platform for users to browse, search, and order their favorite dishes from various restaurants.
+The  Food App is a full-stack web application built using the MERN (MongoDB, Express, React, Node.js) stack, with an added touch of Tailwind CSS for efficient styling..  It provides a seamless and intuitive platform for users to browse, search, and order their favorite dishes.
 
 # Website Link: 
  https://mern-foodapp.netlify.app/
