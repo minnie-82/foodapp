@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from './ContextReducer';
 
@@ -13,9 +13,23 @@ export default function Navbar() {
   }
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+
   }
 
   return (
@@ -27,7 +41,7 @@ export default function Navbar() {
               <div className="flex-shrink-0">
                 <h1 className="text-white font-semibold text-lg">Food App</h1>
               </div>
-              <div className="hidden md:block ml-10">
+              <div className={isSmallScreen ? 'hidden ' : 'ml-10'}>
                 <div className="flex items-baseline space-x-4">
                   <Link to="/" className="text-white hover:text-gray-200 px-3 py-2 rounded-md text-sm font-medium">Home</Link>
                   <Link to="/Aboutus" className="text-white hover:text-gray-200 px-3 py-2 rounded-md text-sm font-medium">AboutUs</Link>
@@ -70,7 +84,8 @@ export default function Navbar() {
             </div>
 
             {!(localStorage.getItem("Authtoken")) ? (
-              <div className="hidden md:block ml-4">
+              <div className={isSmallScreen ? 'hidden ' : 'md:block ml-4'}>
+             
                 <Link
                   to="/Login"
                   className="inline-block text-sm px-4 py-2  leading-none border rounded text-white border-white hover:border-transparent hover:text-red-500 hover:bg-white mt-4 mr-2 md:mt-0"
@@ -86,7 +101,8 @@ export default function Navbar() {
                 </Link>
               </div>
             ) : (
-              <div className=" hidden md:flex items-center space-x-2">
+              <div className={isSmallScreen ? 'hidden ' : ' md:flex items-center space-x-2'}>
+            
                 <div
                   className="flex items-center text-md px-2  py-1 leading-none border rounded border-white hover:border-transparent text-red-500 bg-white"
                   onClick={() => {
@@ -110,7 +126,7 @@ export default function Navbar() {
                       />
                     </svg>
                   ) : (
-                    <span className="ml-1 inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-medium px-1 bg-white text-red-500">
+                    <span className="ml-1 inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-medium px-1 bg-red-500 text-white">
                       {data.length}
                     </span>
                   )}
@@ -126,8 +142,9 @@ export default function Navbar() {
           </div>
         </div>
       </nav>
+      {/* //For medium size screen navbar */}
       {isMenuOpen && (
-        <div className="md:hidden">
+        <div className=" md:hidden">
           <div className="flex flex-col space-y-2 px-4 py-3 bg-red-500">
             <Link
               to="/"
